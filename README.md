@@ -5,6 +5,6 @@ IN PROGRESS
 
 After clone this project :
 
-Install all the dependencies with : composer install
-Launch symfony server with : symfony server:start --no-tls -d
-Launch docker command for Mercure Hub : docker-compose up -d
+- Install all the dependencies with : composer install
+- Launch symfony server with : symfony serve -d
+- Launch docker command for Mercure Hub : docker-compose up -d
