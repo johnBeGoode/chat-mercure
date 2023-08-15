@@ -2,22 +2,24 @@
 
 namespace App\Controller;
 
+use Exception;
 use App\Entity\Channel;
 use App\Entity\Message;
 use App\Form\MessageType;
 use App\Repository\ChannelRepository;
 use App\Repository\MessageRepository;
-use Doctrine\ORM\EntityManager;
-use Exception;
+use Symfony\Component\Mercure\Update;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Mercure\HubInterface;
-use Symfony\Component\Mercure\Update;
 
 class ChatController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/', name: 'app_home')]
     public function index(ChannelRepository $channelRepo): Response
     {   
@@ -28,6 +30,7 @@ class ChatController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/channel/{id}', name: 'app_channel')]
     public function channel(Request $request, MessageRepository $messageRepo, ChannelRepository $channelRepo, Channel $channel): Response
     {
@@ -47,10 +50,11 @@ class ChatController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/channel/{id}/post-message', name: 'app_channel_post_message', methods:['POST'])]
-    public function channelPostMessage(Request $request, Channel $channel, EntityManager $em, HubInterface $hub): Response
+    public function channelPostMessage(Request $request, Channel $channel, EntityManagerInterface $em, HubInterface $hub): Response
     {
-        $data = json_decode($request->getContent(), true); // essayer toArray()
+        $data = \json_decode($request->getContent(), true); // essayer toArray()
         if (empty($data['content'])) {
             throw new Exception('No data sent');
         }
