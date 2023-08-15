@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Exception;
 use App\Entity\Channel;
 use App\Entity\Message;
 use App\Form\MessageType;
@@ -51,19 +50,19 @@ class ChatController extends AbstractController
     }
 
     #[IsGranted('ROLE_USER')]
-    #[Route('/channel/{id}/post-message', name: 'app_channel_post_message', methods:['POST'])]
+    #[Route('channel/{id}/post-message', name: 'app_channel_post_message', methods:['POST'])]
     public function channelPostMessage(Request $request, Channel $channel, EntityManagerInterface $em, HubInterface $hub): Response
     {
         $data = \json_decode($request->getContent(), true); // essayer toArray()
         if (empty($data['content'])) {
-            throw new Exception('No data sent');
+            throw new \Exception('No data sent');
         }
 
         $message = new Message();
         $message->setContent($data['content']);
         $message->setAuthor($this->getUser());
         $message->setDate(new \DateTime());
-        $message->setChannel($channel->getId());
+        $message->setChannel($channel);
 
         $em->persist($message);
         $em->flush();

@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const messageToServer = (data) => {
     
-        const url = window.location.href+ "/post-message";
+        const url = window.location.href + "/post-message";
         formMessageContent = document.querySelector("#message_content");
     
         fetch(url, { // On envoie avec un post nos datas sur le endpoint /message de notre application
