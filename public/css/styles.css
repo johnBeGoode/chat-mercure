@@ -1,0 +1,7 @@
+.one-message span.message {
+    display: inline-block;
+    background-color: #4a58f4;
+    padding: 2px 5px;
+    color: whitesmoke;
+    border-radius: 5px;
+}

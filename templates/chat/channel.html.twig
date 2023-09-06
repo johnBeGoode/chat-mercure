@@ -6,7 +6,7 @@
     <div class="border rounded text-bg-warning w-25 p-2 text-center mb-3 text-white fw-bold">{{ channelName }}</div>
     <div id="show-message" class="border w-50">
         {% for message in messagesForAChannel %}
-            <div class="one-message">{{ message.author}} dit: <br> {{ message.content }}</div>
+            <div class="one-message mb-1">{{ message.author}} dit: <br> <span class="message">{{ message.content }}</span></div>
         {% endfor %}
     </div>
     <div class="mt-5">
