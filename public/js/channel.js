@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const url = window.location.href + "/post-message";
         formMessageContent = document.querySelector("#message_content");
     
-        fetch(url, { // On envoie avec un post nos datas sur le endpoint /message de notre application
+        fetch(url, { // On envoie avec un post nos datas sur le endpoint /post-message de notre application
             method: 'POST',
             body: JSON.stringify(data) // On envoie les data sous format JSON
         }).then((response) => {
@@ -30,6 +30,5 @@ document.addEventListener("DOMContentLoaded", () => {
         }).catch((error) => {
             console.log(error)
         });
-    
     }
 });

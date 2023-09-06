@@ -15,16 +15,16 @@
         {# <input type="submit" id="form-submit" class="btn btn-primary" value="Send"> #}
         {{ form_end(form) }}
     </div>
-{% endblock %}
+{# {% endblock %}
 
-{% block javascripts %}
+{% block javascripts %} #}
     <script src="{{ asset('js/channel.js') }}"></script>
     <script src="{{ asset('js/mercure.js') }}"></script>
     <script>
         let currentUrl = window.location.href;
         let currentIdChannel = currentUrl.charAt(currentUrl.length-1);
 
-        const eventSource = new EventSource("{{ mercure('https://127.0.0.1:8000/channel/') }}" + currentIdChannel, {withCredentials: true});
+        const eventSource = new EventSource("{{ mercure('https://localhost:8000/channel/') }}" + currentIdChannel, { withCredentials: true });
         eventSource.onmessage = event => {
             messageMercure(JSON.parse(event.data));
         }

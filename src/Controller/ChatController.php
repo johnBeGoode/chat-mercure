@@ -71,13 +71,13 @@ class ChatController extends AbstractController
             'https://localhost:8000/channel/' . $channel->getId(),
             json_encode([
                 'content' => $message->getContent(),
-                'author' => $message->getAuthor(),
+                'author' => $message->getAuthor()->getEmail(),
                 'date' => $message->getDate()
             ])
         );
 
         $hub->publish($update);
 
-        return new Response('Published');
+        return new Response('Published', 200, array('Content-Type' => 'text/html'));
     }
 }
